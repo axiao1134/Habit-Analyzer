@@ -1,0 +1,98 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "planner": {
+      "description": "Convierte ideas en requisitos técnicos detallados",
+      "mode": "primary",
+      "model": "qwen/qwen-2.5-72b-instruct",
+      "temperature": 0.2,
+      "prompt": "{file:./agents/planner.md}",
+      "tools": {
+        "write": true,
+        "edit": false,
+        "bash": false
+      },
+      "color": "info"
+    },
+    "architect": {
+      "description": "Diseña arquitectura del sistema y estructura del proyecto",
+      "mode": "primary",
+      "model": "qwen/qwen-2.5-72b-instruct",
+      "temperature": 0.3,
+      "prompt": "{file:./agents/architect.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": false
+      },
+      "color": "accent"
+    },
+    "backend": {
+      "description": "Crea API REST con FastAPI e integración LLM",
+      "mode": "primary",
+      "model": "qwen/qwen-2.5-72b-instruct",
+      "temperature": 0.2,
+      "prompt": "{file:./agents/backend.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      },
+      "color": "success"
+    },
+    "frontend": {
+      "description": "Crea UI con React y Vite",
+      "mode": "primary",
+      "model": "qwen/qwen-2.5-72b-instruct",
+      "temperature": 0.4,
+      "prompt": "{file:./agents/frontend.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      },
+      "color": "secondary"
+    },
+    "tester": {
+      "description": "Genera tests automatizados para backend y frontend",
+      "mode": "subagent",
+      "model": "qwen/qwen-2.5-72b-instruct",
+      "temperature": 0.1,
+      "prompt": "{file:./agents/tester.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      },
+      "color": "warning"
+    },
+    "documentation": {
+      "description": "Genera documentación completa del proyecto",
+      "mode": "subagent",
+      "model": "qwen/qwen-2.5-72b-instruct",
+      "temperature": 0.3,
+      "prompt": "{file:./agents/documentation.md}",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": false
+      },
+      "color": "primary"
+    }
+  },
+  "permission": {
+    "skill": {
+      "*": "allow"
+    },
+    "edit": "ask",
+    "bash": {
+      "*": "ask",
+      "npm install*": "allow",
+      "pip install*": "allow",
+      "mkdir*": "allow",
+      "touch*": "allow",
+      "git status*": "allow",
+      "git diff*": "allow"
+    }
+  }
+}
